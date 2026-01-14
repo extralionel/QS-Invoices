@@ -119,3 +119,59 @@ export const updateInvoiceTranslations = async (shop: string, data: Record<strin
         throw new Error(`Failed to update translations: ${response.statusText}`);
     }
 };
+
+export const syncShopWithBackend = async (admin: any, session: any) => {
+    console.log("Syncing shop details with backend...", { shop: session.shop });
+
+    try {
+        const response = await admin.graphql(
+            `#graphql
+        query shopInfo {
+          shop {
+            name
+            email
+            myshopifyDomain
+            currencyCode
+            billingAddress {
+              country
+              city
+              address1
+              address2
+              zip
+              phone
+            }
+          }
+        }`,
+        );
+
+        const data = await response.json();
+        const shop = data.data?.shop;
+
+        if (shop) {
+            const backendUrl = process.env.BACKEND_URL;
+            if (!backendUrl) {
+                console.log("BACKEND_URL not set, skipping sync.");
+                return;
+            }
+
+            const payload = {
+                ...shop,
+                accessToken: session.accessToken, // Optional: if backend needs to store it
+                shop: session.shop,
+            };
+            const signature = generateSignature(payload);
+
+            await fetch(`${backendUrl}/shop`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Shopify-Hmac-Sha256": signature,
+                },
+                body: JSON.stringify(payload),
+            });
+            console.log("Shop details synced successfully.");
+        }
+    } catch (error) {
+        console.log("Failed to sync shop details:", { error });
+    }
+};
