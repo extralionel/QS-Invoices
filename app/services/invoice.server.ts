@@ -128,11 +128,12 @@ export const syncShopWithBackend = async (admin: any, session: any) => {
             `#graphql
                 query shopInfo {
                     shop {
-                    name
-                    email
-                    myshopifyDomain
-                    currencyCode
-                    ianaTimezone
+                        id
+                        name
+                        email
+                        myshopifyDomain
+                        currencyCode
+                        ianaTimezone
                     billingAddress {
                         country
                         city
@@ -140,16 +141,18 @@ export const syncShopWithBackend = async (admin: any, session: any) => {
                         address2
                         zip
                         phone
-                    }
-                    }
-                }`,
+                }
+              }
+           }`,
         );
 
         const data = await response.json();
         const shopFromApi = data.data?.shop;
         const shop = {
             ...shopFromApi,
+            shopifyId: shopFromApi?.id,
             timezone: shopFromApi?.ianaTimezone,
+            currency: shopFromApi?.currencyCode
         };
 
         if (shop) {
