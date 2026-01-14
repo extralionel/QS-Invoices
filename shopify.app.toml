@@ -3,7 +3,7 @@
 client_id = "0aa9fb0049571fb57a6f0634b668144c"
 name = "qs-invoices"
 #application_url = "https://pied-lanora-indicatively.ngrok-free.dev"
-application_url = "https://qs-invoices-shopify.onrender.com"
+application_url = "https://qs-invoices-production.up.railway.app"
 
 embedded = true
 
@@ -26,4 +26,4 @@ api_version = "2026-04"
 scopes = "read_customers,read_orders,write_products"
 
 [auth]
-redirect_urls = [ "https://qs-invoices-shopify.onrender.com/api/auth" ]
+redirect_urls = [ "https://qs-invoices-production.up.railway.app/api/auth" ]
