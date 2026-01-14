@@ -126,26 +126,31 @@ export const syncShopWithBackend = async (admin: any, session: any) => {
     try {
         const response = await admin.graphql(
             `#graphql
-        query shopInfo {
-          shop {
-            name
-            email
-            myshopifyDomain
-            currencyCode
-            billingAddress {
-              country
-              city
-              address1
-              address2
-              zip
-              phone
-            }
-          }
-        }`,
+                query shopInfo {
+                    shop {
+                    name
+                    email
+                    myshopifyDomain
+                    currencyCode
+                    ianaTimezone
+                    billingAddress {
+                        country
+                        city
+                        address1
+                        address2
+                        zip
+                        phone
+                    }
+                    }
+                }`,
         );
 
         const data = await response.json();
-        const shop = data.data?.shop;
+        const shopFromApi = data.data?.shop;
+        const shop = {
+            ...shopFromApi,
+            timeZone: shopFromApi?.ianaTimezone,
+        };
 
         if (shop) {
             const backendUrl = process.env.BACKEND_URL;
