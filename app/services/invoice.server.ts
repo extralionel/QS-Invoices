@@ -156,7 +156,7 @@ export const syncShopWithBackend = async (admin: any, session: any) => {
             };
             const signature = generateSignature(payload);
 
-            await fetch(`${backendUrl}/shop`, {
+            await fetch(`${backendUrl}/api/v1/shop`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -164,8 +164,6 @@ export const syncShopWithBackend = async (admin: any, session: any) => {
                 },
                 body: JSON.stringify(payload),
             });
-            console.log("payload: ", payload);
-            console.log("Shop details synced successfully, URI:", backendUrl);
         }
     } catch (error) {
         console.log("Failed to sync shop details:", { error });
