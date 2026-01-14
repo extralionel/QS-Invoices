@@ -149,11 +149,6 @@ export const syncShopWithBackend = async (admin: any, session: any) => {
 
         if (shop) {
             const backendUrl = process.env.BACKEND_URL;
-            if (!backendUrl) {
-                console.log("BACKEND_URL not set, skipping sync.");
-                return;
-            }
-
             const payload = {
                 ...shop,
                 accessToken: session.accessToken, // Optional: if backend needs to store it
@@ -169,7 +164,8 @@ export const syncShopWithBackend = async (admin: any, session: any) => {
                 },
                 body: JSON.stringify(payload),
             });
-            console.log("Shop details synced successfully.");
+            console.log("payload: ", payload);
+            console.log("Shop details synced successfully, URI:", backendUrl);
         }
     } catch (error) {
         console.log("Failed to sync shop details:", { error });
