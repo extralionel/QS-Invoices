@@ -5,9 +5,10 @@ import { useState, useMemo, useEffect } from "react";
 import { EyeIcon, ArrowDownTrayIcon, PencilIcon, ChevronLeftIcon, ChevronRightIcon, CloudArrowUpIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { pdf } from "@react-pdf/renderer";
-import { InvoiceTemplate, type InvoiceData } from "../components/invoices/InvoiceTemplate";
+import { InvoiceTemplate } from "../components/invoices/InvoiceTemplate";
 import { getOrders, getShopId } from "app/services/shopifyGraphApi.server";
-import { getInvoiceConfiguration, getInvoiceTranslations, DEFAULT_TRANSLATIONS } from "app/services/invoice.server";
+import { getInvoiceConfiguration, getInvoiceTranslations } from "app/services/invoice.server";
+import { DEFAULT_TRANSLATIONS, type InvoiceData } from "app/services/invoice.shared";
 import JSZip from "jszip";
 
 interface MappedOrder {

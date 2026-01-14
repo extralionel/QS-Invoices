@@ -3,7 +3,8 @@ import type { LoaderFunctionArgs, ActionFunctionArgs } from "react-router";
 import { Form, useActionData, useLoaderData, useNavigation, useSubmit } from "react-router";
 import { useEffect, useState } from "react";
 import { useAppBridge } from "@shopify/app-bridge-react";
-import { getInvoiceTranslations, updateInvoiceTranslations, type InvoiceTranslations } from "../services/invoice.server";
+import { getInvoiceTranslations, updateInvoiceTranslations } from "../services/invoice.server";
+import { type InvoiceTranslations } from "../services/invoice.shared";
 import { getShopId } from "../services/shopifyGraphApi.server";
 import { CheckIcon, LanguageIcon, ArrowPathIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 

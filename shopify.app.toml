@@ -2,7 +2,9 @@
 
 client_id = "0aa9fb0049571fb57a6f0634b668144c"
 name = "qs-invoices"
-application_url = "https://pied-lanora-indicatively.ngrok-free.dev"
+#application_url = "https://pied-lanora-indicatively.ngrok-free.dev"
+application_url = "https://qs-invoices-shopify.onrender.com"
+
 embedded = true
 
 [build]
@@ -21,7 +23,7 @@ api_version = "2026-04"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products,read_orders,read_customers"
+scopes = "read_customers,read_orders,write_products"
 
 [auth]
-redirect_urls = [ "https://pied-lanora-indicatively.ngrok-free.dev/api/auth" ]
+redirect_urls = [ "https://qs-invoices-shopify.onrender.com/api/auth" ]
