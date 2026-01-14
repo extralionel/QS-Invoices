@@ -159,6 +159,7 @@ export const syncShopWithBackend = async (admin: any, session: any) => {
                 accessToken: session.accessToken, // Optional: if backend needs to store it
                 shop: session.shop,
             };
+            console.log("payload: ", payload);
             const signature = generateSignature(payload);
 
             await fetch(`${backendUrl}/api/v1/shop`, {
