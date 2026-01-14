@@ -149,7 +149,7 @@ export const syncShopWithBackend = async (admin: any, session: any) => {
         const shopFromApi = data.data?.shop;
         const shop = {
             ...shopFromApi,
-            timeZone: shopFromApi?.ianaTimezone,
+            timezone: shopFromApi?.ianaTimezone,
         };
 
         if (shop) {
